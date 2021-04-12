@@ -47,7 +47,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": []
+    "*.{ts,tsx}": [
+      "import-sort-cli --write",
+      "prettier --write"
+    ],
+    "*.{json,md}": ["prettier --write"],
+    "*.hbs": ["prettier --write"]
   },
   "prettier": {
     "trailingComma": "all"
