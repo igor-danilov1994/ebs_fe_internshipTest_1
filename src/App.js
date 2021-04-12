@@ -6,7 +6,7 @@ function App() {
     name: 'Igor',
   };
 
-  const name = obj.name
+  obj = "name"
 
   return (
     <div className="App">
