@@ -47,9 +47,9 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "npm run lint:fix",
-      "git add"
-    ]
+    "*.{js,jsx}": []
+  },
+  "prettier": {
+    "trailingComma": "all"
   }
 }
