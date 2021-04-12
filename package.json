@@ -42,13 +42,19 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "npx prettier --write -c .prettierrc \"src/**/*.{ts,tsx,json,css,scss}\""
     }
   },
   "lint-staged": {
     "*.{ts,tsx}": []
   },
   "prettier": {
-    "trailingComma": "all"
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 120,
+    "jsxBracketSameLine": false,
+    "endOfLine": "lf"
   }
 }

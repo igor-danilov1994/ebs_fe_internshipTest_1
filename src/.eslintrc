@@ -1,0 +1,11 @@
+{
+    "env": {
+        "browser": true,
+        "es6": false,
+        "node": true
+    },
+    "extends": "react-app",
+    "rules": {
+        "react-hooks/exhaustive-deps": "off"
+    }
+}
