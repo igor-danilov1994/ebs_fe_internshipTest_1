@@ -16,8 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prettier": "prettier --write src/**/*.js"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -47,12 +46,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "import-sort-cli --write",
-      "prettier --write"
-    ],
-    "*.{json,md}": ["prettier --write"],
-    "*.hbs": ["prettier --write"]
+    "*.{ts,tsx}": []
   },
   "prettier": {
     "trailingComma": "all"
