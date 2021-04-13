@@ -2,8 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-    const obj={name:'Igor'}
-    var    a="name"
+    const obj = {
+        name: 'Igor'
+    }
+    console.log(obj)
+
+    obj.name = 'Ivan'
+    console.log(obj.name)
 
     return (
         <div className="App">
