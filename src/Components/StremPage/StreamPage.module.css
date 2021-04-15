@@ -1,0 +1,64 @@
+.btn {
+  background-color: #333333;
+  padding: 8px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.btn div {
+  padding: 10px;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+.btn_play:before {
+  content: "";
+  position: absolute;
+  border: 5px solid transparent;
+  border-left: 6px solid #ffffff;
+  margin-left: 6px;
+}
+.btn_pause:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 50%;
+  border-left: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+}
+
+.streamPage {
+  padding: 25px 60px;
+}
+.streamPage_header {
+  padding: 20px 0;
+  border-bottom: 0.5px solid gray;
+}
+.streamPage_resume {
+  padding: 6px 12px;
+  background-color: darkorchid;
+  color: #fff;
+}
+.streamPage_track {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+  border-top: solid 1px #333333;
+}
+.streamPage_track:hover {
+  background-color: antiquewhite;
+}
+.streamPage_track_data {
+  display: flex;
+  align-items: center;
+}
+.streamPage_track_data span {
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=StreamPage.module.css.map */
