@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
-import style from "./StremPage/StreamPage.module.css";
 
-type PlayerType = {
+export type PlayerType = {
     url: string,
     isPlay: (url: string | null) => void
 }
@@ -16,12 +15,12 @@ const Player: React.FC<PlayerType> = ({url, isPlay}) => {
         audioTrack.current.src = url
 
         play ? audioTrack.current.play() : audioTrack.current.pause();
-        play ? isPlay(url) : isPlay(null)
+        //play ? isPlay(url) : isPlay(null)
 
     }, [play])
 
     return (
-        <div onClick={() => setPlay(!play)}> </div>
+        <div style={{border: 'solid 1px red', width: '200px', height: '200px'}} onClick={() => setPlay(!play)}> </div>
     );
 };
 

@@ -1,8 +1,10 @@
-import Player from 'Components/Player';
-import React, {useEffect, useRef, useState} from 'react';
+import Player from 'Components/Player/Player';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import style from './StreamPage.module.css'
+import AudioBox from "../AudioBox/AudioBox";
+import {Context} from "../../App";
 
-type TrackListType = {
+export type TrackListType = {
     id: number,
     name: string,
     executor: string,
@@ -14,31 +16,17 @@ type StreamPagePropsType = {
 }
 
 const StreamPage: React.FC<StreamPagePropsType> = ({trackList}) => {
-
-
-    const [trackURL, setTrackURL] = useState<string | null>()
-
-    const isPlay = (url: string | null) => {
-        setTrackURL(url)
-    }
-
+    // @ts-ignore
+    const {play, currentAudioURL} = useContext(Context);
 
     return (
         <div className={style.streamPage}>
             <div className={style.streamPage_header}>
                 <span className={style.streamPage_resume}>Resume</span>
 
-                {trackList.map((track: TrackListType) =>
-                    <div key={track.id} className={style.streamPage_track}>
-                        <div className={style.streamPage_track_data}>
-                            <div
-                                className={`${style.btn} ${trackURL === track.source ? `${style.btn_pause}` : `${style.btn_play}`}`}>
-                                <Player isPlay={isPlay} url={track.source}/>
-
-                            </div>
-                            <span>{track.name}</span>
-                        </div>
-                        <span> duration </span>
+                {trackList.map((audio: TrackListType) =>
+                    <div key={audio.id}>
+                        <AudioBox audio={audio}/>
                     </div>
                 )}
             </div>

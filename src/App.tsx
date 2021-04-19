@@ -1,14 +1,20 @@
 import './App.css';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import StreamPage from "./Components/StremPage/StreamPage";
+import AudioTrack from 'Components/AudioTrack/AudioTrack';
+
+
+export const Context = React.createContext({});
+
+
+export type TrackListType = {
+    id: number,
+    name: string,
+    executor: string,
+    source: string,
+}
 
 function App() {
-    type TrackListType = {
-        id: number,
-        name: string,
-        executor: string,
-        source: string,
-    }
 
     const TrackList = [
         {
@@ -49,25 +55,35 @@ function App() {
         }
     ]
 
-    const [duration, setDuration] = useState(0)
+    const [volume, setVolume] = useState(0.5)
+    const [play, setPlaying] = useState(false)
+    const [currentAudioURL, onChangURL] = useState<string | null>()
 
-    const song: any = useRef()
-
-    const Play = (url: string) => {
-        const audio = new Audio(url);
-        audio.play()
-        audio.addEventListener('loadedmetadata', function () {
-            setDuration(audio.duration / 60)
-        });
+    const setPlay = (value: boolean) => {
+        setPlaying(value)
     }
-    return (
-        <>
-            <div>
-                <button onClick={() => Play("HammAli_&amp;_Navai_Прятки.mp3")}>Song2</button>
-            </div>
 
+    useEffect(() => {
+        //console.log('url')
+    }, [play])
+
+    const onChangeVolume = (e: any) => {
+        let volume = Number(e.target.value)
+        setVolume(volume / 100)
+    }
+
+    const setCurrentAudioURL = (url: string) => {
+        onChangURL(url)
+    }
+
+    return (
+        <Context.Provider value={{
+            volume, play, setPlay,
+            currentAudioURL, setCurrentAudioURL
+        }}>
             <StreamPage trackList={TrackList}/>
-        </>
+            <AudioTrack onChange={onChangeVolume}/>
+        </ Context.Provider>
     )
 }
 
