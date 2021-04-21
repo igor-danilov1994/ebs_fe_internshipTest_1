@@ -16,8 +16,6 @@ type StreamPagePropsType = {
 }
 
 const StreamPage: React.FC<StreamPagePropsType> = ({trackList}) => {
-    // @ts-ignore
-    const {play, currentAudioURL} = useContext(Context);
 
     return (
         <div className={style.streamPage}>

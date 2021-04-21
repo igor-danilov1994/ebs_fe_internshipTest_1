@@ -38,8 +38,53 @@
   display: flex;
   flex-direction: column;
 }
-.audioTrack_progressBar input {
+.audioTrack_options {
+  display: flex;
+}
+.audioTrack_options__volume {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.audioTrack_options__volume:hover span {
+  display: block;
+}
+.audioTrack_options__volume img {
+  padding: 5px;
+  width: 20px;
   cursor: pointer;
+  border: solid 1px transparent;
+}
+.audioTrack_options__volume img:hover {
+  border: solid 1px red;
+  background-color: antiquewhite;
+  border-radius: 50%;
+}
+.audioTrack_options__volume span {
+  border: solid 1px red;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 12px;
+  display: none;
+  position: absolute;
+  top: -45px;
+  z-index: 99;
+}
+.audioTrack_options__volume span input {
+  cursor: pointer;
+}
+.audioTrack_options__repeat img {
+  padding: 5px;
+  width: 20px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: solid 1px transparent;
+}
+.audioTrack_options__repeat img:hover {
+  border: solid 1px red;
+  background-color: antiquewhite;
 }
 
 /*# sourceMappingURL=AudioTrack.module.css.map */
