@@ -1,4 +1,4 @@
-.audioTrack {
+.audioPlayer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,18 +6,18 @@
   background-color: aliceblue;
   border: solid 0.5px red;
 }
-.audioTrack_control {
+.audioPlayer_control {
   display: flex;
   align-items: center;
 }
-.audioTrack_control img {
+.audioPlayer_control img {
   cursor: pointer;
   width: 50px;
   height: 50px;
   margin: 0 20px;
   position: relative;
 }
-.audioTrack_control img::after {
+.audioPlayer_control img::after {
   content: "";
   background: red;
   border-radius: 50%;
@@ -27,42 +27,40 @@
   height: 100px;
   position: absolute;
 }
-.audioTrack_control img:nth-child(1) {
+.audioPlayer_control img:nth-child(1) {
   transform: rotate(180deg);
 }
-.audioTrack_control img:first-child, .audioTrack_control img:last-child {
+.audioPlayer_control img:first-child, .audioPlayer_control img:last-child {
   width: 30px;
   margin: 0;
 }
-.audioTrack_progressBar {
+.audioPlayer_progressBar {
   display: flex;
   flex-direction: column;
 }
-.audioTrack_options {
+.audioPlayer_options {
   display: flex;
 }
-.audioTrack_options__volume {
+.audioPlayer_options img {
+  padding: 5px;
+  width: 40px;
+  cursor: pointer;
+  border: solid 1px transparent;
+}
+.audioPlayer_options img:hover {
+  background-color: antiquewhite;
+}
+.audioPlayer_options__volume {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   position: relative;
 }
-.audioTrack_options__volume:hover span {
+.audioPlayer_options__volume:hover span {
   display: block;
 }
-.audioTrack_options__volume img {
-  padding: 5px;
-  width: 20px;
-  cursor: pointer;
-  border: solid 1px transparent;
-}
-.audioTrack_options__volume img:hover {
-  border: solid 1px red;
-  background-color: antiquewhite;
-  border-radius: 50%;
-}
-.audioTrack_options__volume span {
+.audioPlayer_options__volume span {
   border: solid 1px red;
   border-radius: 5px;
   background-color: #ffffff;
@@ -72,19 +70,23 @@
   top: -45px;
   z-index: 99;
 }
-.audioTrack_options__volume span input {
+.audioPlayer_options__volume span input {
   cursor: pointer;
 }
-.audioTrack_options__repeat img {
-  padding: 5px;
-  width: 20px;
-  cursor: pointer;
-  border-radius: 50%;
+.audioPlayer_options__shuffle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: solid 1px transparent;
+  border-radius: 50%;
+  padding: 5px;
 }
-.audioTrack_options__repeat img:hover {
+.audioPlayer_options__shuffle img {
+  padding: 0;
+}
+.audioPlayer_options__shuffle:hover {
   border: solid 1px red;
   background-color: antiquewhite;
 }
 
-/*# sourceMappingURL=AudioTrack.module.css.map */
+/*# sourceMappingURL=AudioPlayer.module.css.map */

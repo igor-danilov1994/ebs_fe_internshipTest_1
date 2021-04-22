@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
 import style from "../StremPage/StreamPage.module.css";
-import Player from "../Player/Player";
 import {Context, setDurationAudio} from "../../App";
 
 export type TrackListType = {
@@ -11,6 +10,7 @@ export type TrackListType = {
 }
 
 type AudioBoxPropsType = {
+    audioSource: string
     audio: TrackListType
 }
 
@@ -20,12 +20,21 @@ type AudioDuration = {
     seconds: number,
 }
 
-const AudioBox: React.FC<AudioBoxPropsType> = ({audio}) => {
-// @ts-ignore
-    const {currentAudioURL} = useContext(Context);
+const AudioBox: React.FC<AudioBoxPropsType> = ({audio, audioSource}) => {
+
+    // @ts-ignore
+    const {play, setPlay, currentAudio, setCurrentAudio,} = useContext(Context);
     const [audioDuration, setAudioDuration] = useState<number[]>([])
     const audioTrack = useRef(new Audio())
+    const playing = useRef<number | null>()
 
+    useEffect(() => {
+        if (currentAudio) {
+           if(currentAudio.id === audio.id) {
+               playing.current = currentAudio.id
+           }
+        }
+    }, [currentAudio, play])
 
     useEffect(() => {
         audioTrack.current.src = audio.source
@@ -33,21 +42,34 @@ const AudioBox: React.FC<AudioBoxPropsType> = ({audio}) => {
             let audioDurations = setDurationAudio(audioTrack.current.duration)
             setAudioDuration(audioDurations)
         })
-    }, [])
+        return (
+            () => {
+                playing.current = null
+                audioTrack.current.removeEventListener('loadeddata', function () {
+                    let audioDurations = setDurationAudio(audioTrack.current.duration)
+                    setAudioDuration(audioDurations)
+                })
+            }
+        )
+    }, [play])
+
+    const TogglePlay = () => {
+        setPlay(!play)
+        setCurrentAudio(audio)
+    }
 
     return (
         <div className={style.streamPage_track}>
             <div className={style.streamPage_track_data}>
                 <div
-                    className={`${style.btn} ${currentAudioURL === audio.source ? `${style.btn_pause}` : `${style.btn_play}`}`}>
-                    <Player currentAudio={audio} url={audio.source}/>
+                    className={`${style.btn} ${playing.current === audio.id && play ? `${style.btn_pause}` : `${style.btn_play}`}`}>
+                    <div onClick={TogglePlay}> </div>
                 </div>
                 <span>{audio.name}</span>
             </div>
             <div>
-                <span>{audioDuration[2] + ':' + audioDuration[3]}</span>
+                <span>{audioDuration[1] + ':' + audioDuration[2]}</span>
             </div>
-
         </div>
     )
 }

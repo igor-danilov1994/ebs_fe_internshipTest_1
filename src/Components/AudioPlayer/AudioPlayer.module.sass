@@ -1,4 +1,4 @@
-.audioTrack
+.audioPlayer
   display: flex
   justify-content: center
   align-items: center
@@ -34,6 +34,16 @@
     flex-direction: column
   &_options
     display: flex
+    img
+      padding: 5px
+      width: 40px
+      cursor: pointer
+      border: solid 1px transparent
+      //border-radius: 50%
+      &:hover
+        //border: solid 1px red
+        background-color: antiquewhite
+
     &__volume
       display: flex
       justify-content: center
@@ -43,15 +53,6 @@
       &:hover
           span
             display: block
-      img
-        padding: 5px
-        width: 20px
-        cursor: pointer
-        border: solid 1px transparent
-        &:hover
-          border: solid 1px red
-          background-color: antiquewhite
-          border-radius: 50%
       span
         border: solid 1px red
         border-radius: 5px
@@ -64,15 +65,21 @@
         input
           cursor: pointer
     &__repeat
+
+    &__shuffle
+      display: flex
+      justify-content: center
+      align-items: center
+      border: solid 1px transparent
+      border-radius: 50%
+      padding: 5px
       img
-        padding: 5px
-        width: 20px
-        cursor: pointer
-        border-radius: 50%
-        border: solid 1px transparent
-        &:hover
-          border: solid 1px red
-          background-color: antiquewhite
+        padding: 0
+      &:hover
+        border: solid 1px red
+        background-color: antiquewhite
+
+
 
 
 

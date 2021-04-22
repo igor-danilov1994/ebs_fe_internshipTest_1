@@ -1,10 +1,7 @@
 import './App.css';
 import React, {useState} from 'react';
 import StreamPage from "./Components/StremPage/StreamPage";
-import AudioTrack from 'Components/AudioTrack/AudioTrack';
-
-
-export const Context = React.createContext({});
+import AudioPlayer from "./Components/AudioPlayer/AudioPlayer";
 
 export const setDurationAudio = (InitDuration: number) => {
 
@@ -12,20 +9,18 @@ export const setDurationAudio = (InitDuration: number) => {
     let durationMinutes = Math.floor(InitDuration / 60 - (durationHour * 60))
     let durationSeconds = Math.floor(InitDuration % 60)
 
-    //let audioDuration = `${durationMinutes} : ${durationSeconds}`
-    let audioDuration = durationMinutes + ' :' + durationSeconds
-
-    return [InitDuration ,durationHour,  durationMinutes, durationSeconds]
+    return [durationHour,  durationMinutes, durationSeconds]
 }
 
-export type TrackListType = {
-    id: number,
-    name: string,
-    executor: string,
-    source: string,
-}
+export const Context = React.createContext({});
 
 function App() {
+    type TrackListType = {
+        id: number,
+        name: string,
+        executor: string,
+        source: string,
+    }
 
     const TrackList = [
         {
@@ -72,12 +67,8 @@ function App() {
         }
     ]
 
-    const [volume, setVolume] = useState(0.5)
     const [play, setPlaying] = useState(false)
-    const [isRepeat, setRepeat] = useState(false)
-    const [currentAudioURL, onChangURL] = useState<string | null>()
     const [currentAudio, setCurrentsAudio] = useState<TrackListType>()
-    const [progressAudio, setProgressAudio] = useState(0)
     const [audioDuration, setAudioDuration] = useState<number[]>([])
 
     const setCurrentAudio = (audio: TrackListType) => {
@@ -88,35 +79,29 @@ function App() {
         setPlaying(value)
     }
 
-    const setRepeatAudio = (repeat: boolean) => {
-        setRepeat(repeat)
-    }
-
     const setTrackAudioDuration = (duration: [] ) => {
         setAudioDuration(duration)
     }
 
-    const onChangeVolume = (e: any) => {
-        let volume = Number(e.target.value)
-        setVolume(volume / 100)
+    type StateType = {
+        play: boolean
+        setPlay: (play: boolean) => void
+        currentAudio: any
+        setTrackAudioDuration: (duration: []) => void
+        audioDuration: number[]
+        setCurrentAudio: (audio: TrackListType) => void
+        TrackList: TrackListType[]
     }
 
-    const onChangeProgress = (progress: number) => {
-        setProgressAudio(progress)
+    const state: StateType = {
+        play, setPlay, TrackList,
+        currentAudio, setTrackAudioDuration,
+        audioDuration, setCurrentAudio,
     }
-
-    const setCurrentAudioURL = (url: string) => {
-        onChangURL(url)
-    }
-
     return (
-        <Context.Provider value={{
-            volume, play, setPlay, progressAudio, onChangeProgress,
-            currentAudioURL, setCurrentAudioURL, isRepeat, setRepeatAudio,
-            setTrackAudioDuration, audioDuration, setCurrentAudio, currentAudio,
-        }}>
+        <Context.Provider value={state}>
             <StreamPage trackList={TrackList}/>
-            <AudioTrack onChangeVolume={onChangeVolume}/>
+            <AudioPlayer/>
         </ Context.Provider>
     )
 }

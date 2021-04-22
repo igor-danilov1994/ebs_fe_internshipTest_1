@@ -1,10 +1,9 @@
-import Player from 'Components/Player/Player';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React from 'react';
 import style from './StreamPage.module.css'
 import AudioBox from "../AudioBox/AudioBox";
-import {Context} from "../../App";
 
-export type TrackListType = {
+
+type TrackListType = {
     id: number,
     name: string,
     executor: string,
@@ -24,7 +23,7 @@ const StreamPage: React.FC<StreamPagePropsType> = ({trackList}) => {
 
                 {trackList.map((audio: TrackListType) =>
                     <div key={audio.id}>
-                        <AudioBox audio={audio}/>
+                        <AudioBox audioSource={audio.source} audio={audio}/>
                     </div>
                 )}
             </div>
