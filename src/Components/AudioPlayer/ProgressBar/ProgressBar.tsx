@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import style from "../AudioPlayer.module.css";
+import style from "./ProgressBar.module.css";
 import {Context} from "../../../App";
 
 type ProgressBarPropsType = {

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import style from "../AudioPlayer.module.css";
+import style from "./Volume.module.css";
 import offVolume from "../img/offVolume.png";
 import onVolume from "../img/onVolume.png";
 
@@ -21,10 +21,10 @@ const Volume: React.FC<VolumePropsType> = ({audio}) => {
     }
 
     return (
-        <div className={style.audioPlayer_options__volume}>
+        <div className={style.audioPlayer__volume}>
             <span>
                 <input onChange={(e) => onChangeVolume(e)}
-                       className={style.audioPlayer_range} type="range"/>
+                       type="range"/>
             </span>
             <img src={volume === 0 ? offVolume : onVolume} alt="volumeIcon"/>
         </div>

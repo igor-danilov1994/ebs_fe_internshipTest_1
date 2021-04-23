@@ -1,0 +1,24 @@
+.audioPlayer__shuffle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px transparent;
+  border-radius: 50%;
+  padding: 5px;
+}
+.audioPlayer__shuffle:hover {
+  border: solid 1px red;
+  background-color: antiquewhite;
+}
+.audioPlayer__shuffle img {
+  width: 40px;
+  cursor: pointer;
+  border: solid 1px transparent;
+  border-radius: 50%;
+  padding: 0;
+}
+.audioPlayer__shuffle img:hover {
+  background-color: antiquewhite;
+}
+
+/*# sourceMappingURL=Shuffle.module.css.map */

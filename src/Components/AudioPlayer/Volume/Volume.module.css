@@ -1,0 +1,36 @@
+.audioPlayer__volume {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.audioPlayer__volume:hover span {
+  display: block;
+}
+.audioPlayer__volume span {
+  border: solid 1px red;
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 12px;
+  display: none;
+  position: absolute;
+  top: -45px;
+  z-index: 99;
+}
+.audioPlayer__volume span input {
+  cursor: pointer;
+}
+.audioPlayer__volume img {
+  padding: 5px;
+  width: 40px;
+  cursor: pointer;
+  border: solid 1px transparent;
+  border-radius: 50%;
+}
+.audioPlayer__volume img:hover {
+  border: solid 1px red;
+  background-color: antiquewhite;
+}
+
+/*# sourceMappingURL=Volume.module.css.map */

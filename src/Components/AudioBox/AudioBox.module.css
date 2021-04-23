@@ -1,3 +1,35 @@
-
+.audioBox_track {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+  border-top: solid 1px #333333;
+  transition: 0.5s;
+}
+.audioBox_track:hover {
+  background-color: antiquewhite;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45), 0 10px 10px rgba(0, 0, 0, 0.42);
+}
+.audioBox_track_name {
+  display: flex;
+  align-items: center;
+}
+.audioBox_track_name span {
+  margin-left: 10px;
+}
+.audioBox_track_name button {
+  padding: 10px;
+  border-radius: 15px;
+  border: solid 1px black;
+  background-color: white;
+  outline: none;
+  cursor: pointer;
+}
+.audioBox_track_name button img {
+  width: 20px;
+}
+.audioBox_track_name button:hover {
+  border: solid 1px red;
+}
 
 /*# sourceMappingURL=AudioBox.module.css.map */

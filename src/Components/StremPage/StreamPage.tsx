@@ -22,9 +22,7 @@ const StreamPage: React.FC<StreamPagePropsType> = ({trackList}) => {
                 <span className={style.streamPage_resume}>Resume</span>
 
                 {trackList.map((audio: TrackListType) =>
-                    <div key={audio.id}>
-                        <AudioBox audioSource={audio.source} audio={audio}/>
-                    </div>
+                    <AudioBox key={audio.id} audio={audio}/>
                 )}
             </div>
         </div>)

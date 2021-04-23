@@ -1,0 +1,17 @@
+.main {
+    position: relative;
+    padding: 25px 100px;
+    border: solid 1px red;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+}
+
+.player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

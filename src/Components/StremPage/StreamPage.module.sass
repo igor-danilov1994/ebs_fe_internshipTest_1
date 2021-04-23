@@ -1,52 +1,11 @@
-.btn
-  background-color: #333333
-  padding: 8px
-  border-radius: 50%
-  position: relative
-  display: flex
-  justify-content: center
-  align-items: center
-  cursor: pointer
-  div
-    padding: 10px
-    border-radius: 50%
-    width: 100%
-    height: 100%
-    z-index: 99
-  &_play
-    &:before
-      content: ''
-      position: absolute
-      border: 5px solid transparent
-      border-left: 6px solid #ffffff
-      margin-left: 6px
-  &_pause
-    &:before
-      content: ''
-      position: absolute
-      width: 2px
-      height: 50%
-      border-left: 1px solid #ffffff
-      border-right: 1px solid #ffffff
 .streamPage
   padding: 25px 60px
+  padding-bottom: 100px
+  width: 100%
   &_header
-    padding: 20px 0
+    width: 100%
     border-bottom: 0.5px solid gray
   &_resume
     padding: 6px 12px
     background-color: darkorchid
     color: #fff
-  &_track
-    display: flex
-    justify-content: space-between
-    align-items: center
-    padding: 20px 10px
-    border-top: solid 1px #333333
-    &:hover
-      background-color: antiquewhite
-    &_data
-      display: flex
-      align-items: center
-      span
-        margin-left: 10px

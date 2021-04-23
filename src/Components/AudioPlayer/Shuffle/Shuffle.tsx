@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState} from 'react'
-import style from "../AudioPlayer.module.css";
+import style from "./Shuffle.module.css";
 import shuffle from "../img/shuffle.png";
 import {Context} from "../../../App";
 
@@ -55,7 +55,7 @@ const Shuffle: React.FC<ShufflePropsType> = ({audio}) => {
     }, [isShuffle.current])
 
     return (
-        <div className={style.audioPlayer_options__shuffle}>
+        <div className={style.audioPlayer__shuffle}>
             <img style={{background: isShuffleAudio ? 'antiquewhite' : ''}}
                  onClick={ShuffleAudio} src={shuffle} alt="repeatIcon"/>
         </div>

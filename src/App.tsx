@@ -2,15 +2,9 @@ import './App.css';
 import React, {useState} from 'react';
 import StreamPage from "./Components/StremPage/StreamPage";
 import AudioPlayer from "./Components/AudioPlayer/AudioPlayer";
+import {Redirect, Route } from 'react-router-dom';
+import TrackProfilePage from 'Components/TrackProfilePage/TrackProfilePage';
 
-export const setDurationAudio = (InitDuration: number) => {
-
-    let durationHour = Math.floor(InitDuration / 60 / 60)
-    let durationMinutes = Math.floor(InitDuration / 60 - (durationHour * 60))
-    let durationSeconds = Math.floor(InitDuration % 60)
-
-    return [durationHour,  durationMinutes, durationSeconds]
-}
 
 export const Context = React.createContext({});
 
@@ -24,47 +18,53 @@ function App() {
 
     const TrackList = [
         {
+            id: 0,
+            name: "Beverly Hills",
+            executor: "Zivert",
+            source: "Zivert_Beverly_Hills.mp3"
+        },
+        {
             id: 1,
-            name: "Прятки",
-            executor: "HammAli & Navai",
-            source: "HammAli_&amp;_Navai_Прятки.mp3"
+            name: "Credo",
+            executor: "Zivert",
+            source: "Zivert_Credo.mp3"
         },
         {
             id: 2,
-            name: "Ocean Drive",
-            executor: "Duke Dumont",
-            source: "duke_dumont-ocean_drive.mp3"
+            name: "Зеленые волны",
+            executor: "Zivert",
+            source: "Zivert_ZelenieVolni.mp3"
         },
         {
             id: 3,
-            name: "Я сошла с ума",
-            executor: "Tatu",
-            source: "tatu-я_ошла_с_ума.mp3"
+            name: "Шарик",
+            executor: " Zivert",
+            source: "Zivert_sharik.mp3"
         },
         {
             id: 4,
-            name: "Нас не догонят",
-            executor: " Tatu",
-            source: "tatu_nas_ne_dogonit.mp3"
+            name: "Сияй",
+            executor: "Zivert",
+            source: "Zivert_Siyai.mp3"
         },
         {
             id: 5,
-            name: "Малиновый свет",
-            executor: "Лёша Свик",
-            source: "lesha_svik-malinovyy_svet.mp3"
+            name: "ЯТЛ",
+            executor: "Zivert",
+            source: "Zivert_YTL.mp3"
         },
         {
             id: 6,
-            name: "Балкон",
-            executor: "Elman feat Jony",
-            source: "Elman_feat_Jony_Balkon.mp3"
+            name: "5",
+            executor: "sec",
+            source: "5-sekund-5.mp3"
         },
         {
             id: 7,
-            name: "Безумный мир",
-            executor: "Мираж",
-            source: "mirazh_-_bezumnyy-mir.mp3"
-        }
+            name: "Fly",
+            executor: "Zivert",
+            source: "Zivert_Fly.mp3"
+        },
     ]
 
     const [play, setPlaying] = useState(false)
@@ -73,13 +73,14 @@ function App() {
 
     const setCurrentAudio = (audio: TrackListType) => {
         setCurrentsAudio(audio)
+        localStorage.setItem('audioSource', audio.source)
     }
 
     const setPlay = (value: boolean) => {
         setPlaying(value)
     }
 
-    const setTrackAudioDuration = (duration: [] ) => {
+    const setTrackAudioDuration = (duration: []) => {
         setAudioDuration(duration)
     }
 
@@ -99,10 +100,22 @@ function App() {
         audioDuration, setCurrentAudio,
     }
     return (
-        <Context.Provider value={state}>
-            <StreamPage trackList={TrackList}/>
-            <AudioPlayer/>
-        </ Context.Provider>
+        <div className="main">
+            <Context.Provider value={state}>
+                <Route path='' render={() => <Redirect to='/StreamPage' />} />
+
+                <Route path='/StreamPage' render={() =>
+                    <div className="container">
+                        <TrackProfilePage />
+                        <StreamPage trackList={TrackList}/>
+                    </div>
+                }/>
+                <div className="player">
+                    <AudioPlayer/>
+                </div>
+            </ Context.Provider>
+        </div>
+
     )
 }
 

@@ -1,0 +1,30 @@
+.audioPlayer
+  &__volume
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    position: relative
+    &:hover
+      span
+        display: block
+    span
+      border: solid 1px red
+      border-radius: 5px
+      background-color: #ffffff
+      padding: 12px
+      display: none
+      position: absolute
+      top: -45px
+      z-index: 99
+      input
+        cursor: pointer
+    img
+      padding: 5px
+      width: 40px
+      cursor: pointer
+      border: solid 1px transparent
+      border-radius: 50%
+      &:hover
+        border: solid 1px red
+        background-color: antiquewhite

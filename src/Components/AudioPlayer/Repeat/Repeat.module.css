@@ -1,0 +1,13 @@
+.audioPlayer__repeat img {
+  padding: 5px;
+  width: 40px;
+  cursor: pointer;
+  border: solid 1px transparent;
+  border-radius: 50%;
+}
+.audioPlayer__repeat img:hover {
+  border: solid 1px red;
+  background-color: antiquewhite;
+}
+
+/*# sourceMappingURL=Repeat.module.css.map */

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import style from './AudioPlayer.module.css'
 import ProgressBar from './ProgressBar/ProgressBar'
 import Volume from "./Volume/Volume";
@@ -23,17 +23,22 @@ const AudioPlayer = () => {
     }
 
     const audio = useRef(new Audio())
+    const [isRepeat, serIsRepeat] = useState(false)
+
+    const setRep = (value: boolean) => {
+        serIsRepeat(value)
+    }
 
     return (
         <div className={style.audioPlayer}>
-            <ControlSlider audio={audio.current} />
+            <ControlSlider isRepeat={isRepeat} audio={audio.current}/>
 
             <ProgressBar audio={audio.current}/>
 
             <div className={style.audioPlayer_options}>
-                <Volume audio={audio.current} />
-                <Repeat audio={audio.current}  />
-                <Shuffle audio={audio.current}  />
+                <Volume audio={audio.current}/>
+                <Repeat setRep={setRep} audio={audio.current}/>
+                <Shuffle audio={audio.current}/>
             </div>
         </div>
     )
