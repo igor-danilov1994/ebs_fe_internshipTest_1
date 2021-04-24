@@ -20,16 +20,27 @@ const ControlSlider: React.FC<ControlSliderPropsType> = ({audio, isRepeat}) => {
     const playing = useRef(false)
 
     useEffect(() => {
+        if (currentAudio) {
+            currentAudio.id === 0 ? serBackBtn(false) : serBackBtn(true)
+
+            currentAudio.id === (TrackList.length - 1) ? setNextBtn(false) : setNextBtn(true)
+        }
+    }, [currentAudio])
+
+    useEffect(() => {
         if (play) {
             audio.addEventListener('ended', () => {
-                audio.currentTime = 0
                 if (isRepeat) {
-                    console.log(isRepeat)
-                    setPlay(true)
+                    audio.play()
                 } else {
                     NextTrack()
                 }
             })
+        }
+    }, [isRepeat, play])
+
+    useEffect(() => {
+        if (play) {
             let audioSource = localStorage.getItem('audioSource')
 
             audio.src = audioSource ? audioSource : currentAudio.source
@@ -39,18 +50,10 @@ const ControlSlider: React.FC<ControlSliderPropsType> = ({audio, isRepeat}) => {
         }
         return () => {
             audio.removeEventListener('ended', () => {
-                //setPlay(false)
                 NextTrack()
             })
         }
-    }, [play, currentAudio, playing.current, isRepeat])
-
-    useEffect(() => {
-        if (currentAudio && play) {
-            currentAudio.id !== 0 && serBackBtn(true)
-            currentAudio.id !== (TrackList.length - 1) && setNextBtn(!nextBtn)
-        }
-    }, [play])
+    }, [play, currentAudio, playing.current])
 
     const NextTrack = () => {
         let nextTrackID = TrackList[currentAudio.id].id + 1
@@ -77,7 +80,7 @@ const ControlSlider: React.FC<ControlSliderPropsType> = ({audio, isRepeat}) => {
     return (
         <div className={style.audioPlayer_control}>
             <button disabled={!backBtn} onClick={BackTrack}>
-                <img style={{opacity: backBtn ? '1' : '0.5'}}
+                <img style={{opacity: !backBtn ? '0.5' : '1'}}
                      src={toggleTrack_icon} alt="icon"/>
             </button>
 
@@ -86,7 +89,7 @@ const ControlSlider: React.FC<ControlSliderPropsType> = ({audio, isRepeat}) => {
             </button>
 
             <button disabled={!nextBtn} onClick={NextTrack}>
-                <img style={{opacity: nextBtn ? '1' : '0.5'}}
+                <img style={{opacity: !nextBtn ? '0.5' : '1'}}
                      src={toggleTrack_icon} alt="icon"/>
             </button>
         </div>

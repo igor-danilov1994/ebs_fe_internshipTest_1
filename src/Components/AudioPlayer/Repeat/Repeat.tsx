@@ -1,7 +1,6 @@
-import React, {useContext, useEffect, useRef, useState} from 'react'
+import React, {useState} from 'react'
 import style from "./Repeat.module.css";
 import repeatIcon from "../img/repeat.png";
-import {Context} from "../../../App";
 
 type RepeatPropsType = {
     audio: any
@@ -10,7 +9,7 @@ type RepeatPropsType = {
 
 const Repeat: React.FC<RepeatPropsType> = ({audio, setRep}) => {
 
-    //const isRepeat = useRef(false)
+
     const [isRepeatAudio, setRepeatAudio] = useState(false)
 
     const setRepeat = () => {

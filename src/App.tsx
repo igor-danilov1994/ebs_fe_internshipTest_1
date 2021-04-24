@@ -68,7 +68,7 @@ function App() {
     ]
 
     const [play, setPlaying] = useState(false)
-    const [currentAudio, setCurrentsAudio] = useState<TrackListType>()
+    const [currentAudio, setCurrentsAudio] = useState<TrackListType | null>()
     const [audioDuration, setAudioDuration] = useState<number[]>([])
 
     const setCurrentAudio = (audio: TrackListType) => {

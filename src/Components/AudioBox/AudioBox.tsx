@@ -54,11 +54,20 @@ const AudioBox: React.FC<AudioBoxPropsType> = ({audio}) => {
     }, [currentAudio, play])
 
     useEffect(() => {
-        audioTrack.current.src = audio.source
-        audioTrack.current.addEventListener('loadeddata', function () {
-            let audioDurations = setDurationAudio(audioTrack.current.duration)
-            setAudioDuration(audioDurations)
-        })
+        if (play) {
+            audioTrack.current.src = audio.source
+            audioTrack.current.addEventListener('loadeddata', function () {
+                let audioDurations = setDurationAudio(audioTrack.current.duration)
+                setAudioDuration(audioDurations)
+            })
+            audioTrack.current.addEventListener('playing', () => {
+                let audioSource = localStorage.getItem('audioSource')
+
+                if (audioSource != audio.source) {
+                    audioTrack.current.currentTime = 0
+                }
+            })
+        }
         return (
             () => {
                 audioTrack.current.removeEventListener('loadeddata', function () {
@@ -67,7 +76,7 @@ const AudioBox: React.FC<AudioBoxPropsType> = ({audio}) => {
                 })
             }
         )
-    }, [])
+    }, [play])
 
     const TogglePlay = () => {
         setPlay(!play)

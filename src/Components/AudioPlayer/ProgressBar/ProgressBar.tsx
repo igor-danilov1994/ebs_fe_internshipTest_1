@@ -14,25 +14,36 @@ const ProgressBar: React.FC<ProgressBarPropsType> = ({audio}) => {
     const [audioDuration, setAudioDuration] = useState(0)
 
     useEffect(() => {
-        audio.addEventListener('timeupdate', () => {
-            setProgressAudio(audio.currentTime)
-        })
-        audio.addEventListener('pause', () => {
-            setProgressAudio(audio.currentTime)
-        })
-        audio.addEventListener('loadeddata', function () {
-            setAudioDuration(audio.duration)
-        })
+
+    }, [currentAudio])
+
+    useEffect(() => {
+        if (play) {
+            audio.addEventListener('timeupdate', () => {
+                setProgressAudio(audio.currentTime)
+            })
+            audio.addEventListener('pause', () => {
+                setProgressAudio(audio.currentTime)
+                setAudioDuration(audio.duration)
+            })
+            audio.addEventListener('play', () => {
+                audio.currentTime = progressAudio
+            })
+            audio.addEventListener('loadeddata', function () {
+                setAudioDuration(audio.duration)
+            })
+        }
         return (
             audio.removeEventListener('timeupdate', () => {
                 setProgressAudio(audio.currentTime)
             }),
-            audio.removeEventListener('pause', () => {
-                setProgressAudio(audio.currentTime)
-            }),
-            audio.removeEventListener('loadeddata', function () {
-                setAudioDuration(audio.duration)
-            })
+                audio.removeEventListener('pause', () => {
+                    setProgressAudio(audio.currentTime)
+                    setAudioDuration(audio.duration)
+                }),
+                audio.removeEventListener('loadeddata', function () {
+                    setAudioDuration(audio.duration)
+                })
         )
     }, [play])
 
