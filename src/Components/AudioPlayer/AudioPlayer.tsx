@@ -9,24 +9,11 @@ import ControlSlider from './ControlSlider/ControlSlider';
 
 const AudioPlayer = () => {
 
-    type TrackListType = {
-        id: number,
-        name: string,
-        executor: string,
-        source: string,
-    }
-
-    type ContextType = {
-        play: boolean
-        setPlay: (play: boolean) => void
-        currentAudio: any | null
-    }
-
     const audio = useRef(new Audio())
-    const [isRepeat, serIsRepeat] = useState(false)
+    const [isRepeat, setIsRepeat] = useState(false)
 
-    const setRep = (value: boolean) => {
-        serIsRepeat(value)
+    const toggleRepeat = (value: boolean) => {
+        setIsRepeat(value)
     }
 
     return (
@@ -37,7 +24,7 @@ const AudioPlayer = () => {
 
             <div className={style.audioPlayer_options}>
                 <Volume audio={audio.current}/>
-                <Repeat setRep={setRep} audio={audio.current}/>
+                <Repeat setRep={toggleRepeat} audio={audio.current}/>
                 <Shuffle audio={audio.current}/>
             </div>
         </div>

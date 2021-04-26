@@ -12,6 +12,7 @@ type ControlSliderPropsType = {
 }
 
 const ControlSlider: React.FC<ControlSliderPropsType> = ({audio, isRepeat}) => {
+
     // @ts-ignore
     const {play, setPlay, currentAudio, TrackList, setCurrentAudio} = useContext(Context);
 
@@ -37,6 +38,15 @@ const ControlSlider: React.FC<ControlSliderPropsType> = ({audio, isRepeat}) => {
                 }
             })
         }
+        return () => {
+            audio.removeEventListener('ended', () => {
+                if (isRepeat) {
+                    audio.play()
+                } else {
+                    NextTrack()
+                }
+            })
+        }
     }, [isRepeat, play])
 
     useEffect(() => {
@@ -47,11 +57,6 @@ const ControlSlider: React.FC<ControlSliderPropsType> = ({audio, isRepeat}) => {
             audio.play()
         } else {
             audio.pause();
-        }
-        return () => {
-            audio.removeEventListener('ended', () => {
-                NextTrack()
-            })
         }
     }, [play, currentAudio, playing.current])
 

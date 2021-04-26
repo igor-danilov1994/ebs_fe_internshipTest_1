@@ -31,5 +31,8 @@
 .audioBox_track_name button:hover {
   border: solid 1px red;
 }
+.audioBox_track_duration {
+  display: flex;
+}
 
 /*# sourceMappingURL=AudioBox.module.css.map */

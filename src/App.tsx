@@ -55,7 +55,7 @@ function App() {
         },
         {
             id: 6,
-            name: "5",
+            name: "shortAudio",
             executor: "sec",
             source: "5-sekund-5.mp3"
         },

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import style from "./ProgressBar.module.css";
 import {Context} from "../../../App";
 
@@ -10,12 +10,10 @@ const ProgressBar: React.FC<ProgressBarPropsType> = ({audio}) => {
 
     // @ts-ignore
     const {play, currentAudio} = useContext(Context);
+
     const [progressAudio, setProgressAudio] = useState<number>(0)
     const [audioDuration, setAudioDuration] = useState(0)
-
-    useEffect(() => {
-
-    }, [currentAudio])
+    const audioSrc = useRef<string>()
 
     useEffect(() => {
         if (play) {
@@ -25,27 +23,29 @@ const ProgressBar: React.FC<ProgressBarPropsType> = ({audio}) => {
             audio.addEventListener('pause', () => {
                 setProgressAudio(audio.currentTime)
                 setAudioDuration(audio.duration)
+                audioSrc.current = currentAudio.source
             })
             audio.addEventListener('play', () => {
-                audio.currentTime = progressAudio
+                audio.currentTime = 0
+                //audio.currentTime = progressAudio
             })
             audio.addEventListener('loadeddata', function () {
                 setAudioDuration(audio.duration)
             })
         }
-        return (
+        return () => {
             audio.removeEventListener('timeupdate', () => {
                 setProgressAudio(audio.currentTime)
-            }),
-                audio.removeEventListener('pause', () => {
-                    setProgressAudio(audio.currentTime)
-                    setAudioDuration(audio.duration)
-                }),
-                audio.removeEventListener('loadeddata', function () {
-                    setAudioDuration(audio.duration)
-                })
-        )
-    }, [play])
+            })
+            audio.removeEventListener('pause', () => {
+                setProgressAudio(audio.currentTime)
+                setAudioDuration(audio.duration)
+            })
+            audio.removeEventListener('loadeddata', function () {
+                setAudioDuration(audio.duration)
+            })
+        }
+    },[play])
 
     const ChangeProgress = (e: any) => {
         let progress = Number(e.target.value)

@@ -16,13 +16,6 @@ type AudioBoxPropsType = {
     audio: TrackListType
 }
 
-type AudioDuration = {
-    hours: number,
-    minutes: number,
-    seconds: number,
-}
-
-
 const AudioBox: React.FC<AudioBoxPropsType> = ({audio}) => {
 
     const setDurationAudio = (InitDuration: number) => {
@@ -54,20 +47,18 @@ const AudioBox: React.FC<AudioBoxPropsType> = ({audio}) => {
     }, [currentAudio, play])
 
     useEffect(() => {
-        if (play) {
-            audioTrack.current.src = audio.source
-            audioTrack.current.addEventListener('loadeddata', function () {
-                let audioDurations = setDurationAudio(audioTrack.current.duration)
-                setAudioDuration(audioDurations)
-            })
-            audioTrack.current.addEventListener('playing', () => {
-                let audioSource = localStorage.getItem('audioSource')
+        audioTrack.current.src = audio.source
+        audioTrack.current.addEventListener('loadeddata', function () {
+            let audioDurations = setDurationAudio(audioTrack.current.duration)
+            setAudioDuration(audioDurations)
+        })
+        audioTrack.current.addEventListener('playing', () => {
+            let audioSource = localStorage.getItem('audioSource')
 
-                if (audioSource != audio.source) {
-                    audioTrack.current.currentTime = 0
-                }
-            })
-        }
+            if (audioSource !== audio.source) {
+                audioTrack.current.currentTime = 0
+            }
+        })
         return (
             () => {
                 audioTrack.current.removeEventListener('loadeddata', function () {
@@ -91,7 +82,7 @@ const AudioBox: React.FC<AudioBoxPropsType> = ({audio}) => {
                 </button>
                 <span>{audio.name}</span>
             </div>
-            <div>
+            <div className={style.audioBox_track_duration}>
                 <span>{audioDuration[1] + ':' + audioDuration[2]}</span>
             </div>
         </div>
